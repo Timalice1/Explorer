@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Lab2 {
     public partial class Form1 : Form {
+        List<string> drives = new List<string>();
+        private string path;
+
         public Form1() {
             InitializeComponent();
             drivesTree.Nodes.Clear();
@@ -14,6 +17,15 @@ namespace Lab2 {
 
             //Fill tree with drives
             FillDriveNodes();
+
+
+            //Convert Drive info array to list
+            foreach (var drive in DriveInfo.GetDrives()) {
+                drives.Add(drive.Name);
+            }
+
+
+
         }
 
 
@@ -68,9 +80,26 @@ namespace Lab2 {
             }
         }
 
+        //Click handler for nodes
         void driverTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) {
-            DirName.Text = e.Node.Text;
-            browserString.Text = e.Node.FullPath;//Set full path of choosed node for browser string
+
+            //If selected node is Drive, set path == Drive.Name
+            if (drives.Contains(e.Node.Text)) {
+                foreach (DriveInfo drive in DriveInfo.GetDrives()) {
+                    if (drive.Name == e.Node.Text) {
+                        path = drive.Name;
+                    }
+                }
+            }
+            //Else set fulll path of directory
+            else {
+                DirName.Text = e.Node.Text;
+                path = e.Node.FullPath;
+            }
+
+            browserString.Text = e.Node.FullPath;//Set full path of selected node for browser string
         }
+
+        
     }
 }
