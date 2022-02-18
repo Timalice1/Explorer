@@ -23,9 +23,10 @@ namespace Lab2 {
             DirectoryInfo info = null;
             try {
                 if (Directory.Exists(e.Node.FullPath)) {
-                    dirs = Directory.GetDirectories(e.Node.FullPath);
+                    dirs = Directory.GetDirectories(e.Node.FullPath);//Get all directories from current path
                     if (dirs.Length != 0) {
                         for (int i = 0; i < dirs.Length; i++) {
+                            //If directory is hidden, skip her
                             info = new DirectoryInfo(dirs[i]);
                             if (info.Attributes.HasFlag(FileAttributes.Hidden))
                                 continue;
@@ -37,7 +38,6 @@ namespace Lab2 {
                 }
             }
             catch (Exception ex) {
-                MessageBox.Show(ex.Message);
             }
         }
                 
@@ -66,6 +66,11 @@ namespace Lab2 {
             }
             catch (Exception ex) {
             }
+        }
+
+        void driverTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) {
+            DirName.Text = e.Node.Text;
+            browserString.Text = e.Node.FullPath;//Set full path of choosed node for browser string
         }
     }
 }
