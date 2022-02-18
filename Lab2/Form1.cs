@@ -10,7 +10,6 @@ namespace Lab2 {
             InitializeComponent();
             drivesTree.Nodes.Clear();
 
-            //drivesTree.BeforeSelect += drivesTree_BeforeSelect;
             drivesTree.BeforeExpand += drivesTree_BeforeExpand;
 
             //Fill tree with drives
@@ -41,27 +40,7 @@ namespace Lab2 {
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-        //void drivesTree_BeforeSelect(object sender, TreeViewCancelEventArgs e) {
-        //    e.Node.Nodes.Clear();
-        //    string[] dirs;
-        //    try {
-        //        if (Directory.Exists(e.Node.FullPath)) {
-        //            dirs = Directory.GetDirectories(e.Node.FullPath);
-        //            if (dirs.Length != 0) {
-        //                for (int i = 0; i < dirs.Length; i++) {
-        //                    TreeNode dirNode = new TreeNode(new DirectoryInfo(dirs[i]).Name);
-        //                    FillTreeNode(dirNode, dirs[i]);
-        //                    e.Node.Nodes.Add(dirNode);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex) {
-        //    }
-        //}
-
+                
         //Get all drives from pc
         private void FillDriveNodes() {
             try {
@@ -74,6 +53,7 @@ namespace Lab2 {
             catch (Exception ex) {
             }
         }
+
         //Get child nodes for current node
         private void FillTreeNode(TreeNode driveNode, string path) {
             try {
