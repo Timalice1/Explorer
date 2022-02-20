@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -8,6 +8,7 @@ namespace Lab2 {
     public partial class Form1 : Form {
         List<string> drives = new List<string>();
         private string path;
+        private string prevPath;
 
         public Form1() {
             InitializeComponent();
@@ -24,7 +25,8 @@ namespace Lab2 {
                 drives.Add(drive.Name);
             }
 
-
+            //Hide all tabs from start
+            tabControl1.Visible = false;
 
         }
 
@@ -52,7 +54,7 @@ namespace Lab2 {
             catch (Exception ex) {
             }
         }
-                
+
         //Get all drives from pc
         private void FillDriveNodes() {
             try {
@@ -82,24 +84,103 @@ namespace Lab2 {
 
         //Click handler for nodes
         void driverTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) {
-
+            
             //If selected node is Drive, set path == Drive.Name
             if (drives.Contains(e.Node.Text)) {
-                foreach (DriveInfo drive in DriveInfo.GetDrives()) {
-                    if (drive.Name == e.Node.Text) {
-                        path = drive.Name;
-                    }
-                }
+                GetDriveInfo(e.Node.Text);
             }
-            //Else set fulll path of directory
+            //Else set full path of directory
             else {
-                DirName.Text = e.Node.Text;
-                path = e.Node.FullPath;
+
+                GetDirInfo(e.Node.FullPath);
             }
 
             browserString.Text = e.Node.FullPath;//Set full path of selected node for browser string
         }
 
-        
+        private void GetDirInfo(String _path) {
+            tabControl1.Visible = true;
+            tabControl1.SelectTab(dirInfoPanel);
+
+            prevPath = path;
+            path = _path;
+
+
+            dirList.Items.Clear();
+            DirectoryInfo directoryInfo = null;
+            string[] files = Directory.GetFileSystemEntries(_path);
+            foreach (string file in files) {
+
+                directoryInfo = new DirectoryInfo(file);
+                if (directoryInfo.Attributes.HasFlag(FileAttributes.Hidden)) {
+                    continue;
+                }
+                dirList.Items.Add(directoryInfo.Name);
+            }
+        }
+
+        private void GetDriveInfo(String name) {
+            tabControl1.Visible = true;
+            DirName.Text = name;
+
+            foreach (DriveInfo drive in DriveInfo.GetDrives()) {
+                if (drive.Name == name) {
+                    path = drive.Name;
+                    tabControl1.SelectTab(driveInfoPanel);
+                    totalSpaceLabel.Text = (drive.TotalSize / (1048576 * 1024)).ToString() + " GB";
+                    freeSpaceLabel.Text = (drive.AvailableFreeSpace / (1048576 * 1024)).ToString() + " GB";
+                    driveFormatLabel.Text = drive.DriveFormat;
+                    driveTypeLabel.Text = drive.DriveType.ToString();
+                    driveVolumeLabel.Text = drive.VolumeLabel;
+                }
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e) {
+            try {
+            
+                prevPath = path;
+                path = browserString.Text;
+                if (drives.Contains(path)) {
+                    GetDriveInfo(path);
+                }
+                else {
+                    GetDirInfo(path);
+                }
+            }
+            catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        void browserString_KeyUp(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                e.SuppressKeyPress = true;
+                searchButton_Click(sender, e);
+            }
+        }
+
+        void viewListItemActive(object sender, EventArgs e) {
+            ListView list = (ListView)sender;
+            var item = list.FocusedItem;
+
+            prevPath = path;
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(path + "\\" + item.Text);
+            if (directoryInfo.Attributes.HasFlag(FileAttributes.Directory)){
+                GetDirInfo(path + "\\" + item.Text);
+                browserString.Text = path;
+            }
+            else {
+                try {
+                    Process process = Process.Start(path + "\\" + item.Text);
+                    process.WaitForExit();
+                    process.Close();
+                }
+                catch (Exception ex) { }
+            }
+
+        }
+
     }
 }
