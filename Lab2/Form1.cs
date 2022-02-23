@@ -191,7 +191,6 @@ namespace Lab2 {
                     listViewItemContextMenu.Show(Cursor.Position);
                 }
             }
-            
         }
 
         //Create new folder from list view menu strip
@@ -224,5 +223,32 @@ namespace Lab2 {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void RenameToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                var focusedItem = dirList.FocusedItem;
+                string name = $"{path}\\{focusedItem.Text}";
+                
+                if (File.Exists(name) || Directory.Exists(name)){
+                    Dialog dialog = new Dialog();
+                    DialogResult res = dialog.ShowDialog();
+                    string new_name = $"{path}\\{dialog.name}";
+                    if (File.Exists(new_name)) {
+                        throw new Exception("This file/folder already exist");
+                    }
+                    DirectoryInfo info = new DirectoryInfo(name);
+                    if (info.Attributes.HasFlag(FileAttributes.Directory)) {
+                        Directory.Move(name, new_name);
+                    }
+                    else {
+                        File.Move(name, new_name);
+                    }
+                }
+                GetDirInfo(path);
+            }catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
+
 }

@@ -15,6 +15,8 @@ namespace Lab2 {
         }
 
         public string name;
+        
+        
 
         private void button1_Click(object sender, EventArgs e) {
             name = textBox1.Text;

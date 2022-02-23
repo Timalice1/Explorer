@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item1");
             this.drivesTree = new System.Windows.Forms.TreeView();
             this.DirName = new System.Windows.Forms.Label();
             this.browserString = new System.Windows.Forms.TextBox();
@@ -49,7 +49,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewItemContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.listItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listItem2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listItem3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
@@ -247,7 +247,7 @@
             this.dirList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dirList.HideSelection = false;
             this.dirList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.dirList.Location = new System.Drawing.Point(-1, 30);
             this.dirList.Name = "dirList";
             this.dirList.Size = new System.Drawing.Size(437, 256);
@@ -296,7 +296,7 @@
             // 
             this.listViewItemContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listItemToolStripMenuItem,
-            this.listItem2ToolStripMenuItem,
+            this.RenameToolStripMenuItem,
             this.listItem3ToolStripMenuItem,
             this.copyToolStripMenuItem});
             this.listViewItemContextMenu.Name = "contextMenuStrip2";
@@ -308,11 +308,12 @@
             this.listItemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listItemToolStripMenuItem.Text = "Move";
             // 
-            // listItem2ToolStripMenuItem
+            // RenameToolStripMenuItem
             // 
-            this.listItem2ToolStripMenuItem.Name = "listItem2ToolStripMenuItem";
-            this.listItem2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.listItem2ToolStripMenuItem.Text = "Rename";
+            this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RenameToolStripMenuItem.Text = "Rename";
+            this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
             // listItem3ToolStripMenuItem
             // 
@@ -375,7 +376,7 @@
         private System.Windows.Forms.ListView dirList;
         private System.Windows.Forms.ContextMenuStrip listViewItemContextMenu;
         private System.Windows.Forms.ToolStripMenuItem listItemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listItem2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listItem3ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip dirListMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem createNewToolStripMenuItem;
