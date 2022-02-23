@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item1");
             this.drivesTree = new System.Windows.Forms.TreeView();
             this.DirName = new System.Windows.Forms.Label();
             this.browserString = new System.Windows.Forms.TextBox();
@@ -246,7 +246,7 @@
             this.dirList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dirList.HideSelection = false;
             this.dirList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.dirList.Location = new System.Drawing.Point(-1, 30);
             this.dirList.Name = "dirList";
             this.dirList.Size = new System.Drawing.Size(437, 256);
@@ -316,6 +316,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // Form1
             // 

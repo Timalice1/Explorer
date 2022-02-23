@@ -191,13 +191,38 @@ namespace Lab2 {
                     listViewItemContextMenu.Show(Cursor.Position);
                 }
             }
+            
         }
 
+        //Create new folder from list view menu strip
         private void folderToolStripMenuItem_Click(object sender, EventArgs e) {
-            Dialog dialog = new Dialog();
-            DialogResult result = dialog.ShowDialog();
-            Directory.CreateDirectory($"{path}\\{dialog.name}");
-            GetDirInfo(path);
+            try {
+                Dialog dialog = new Dialog();
+                DialogResult result = dialog.ShowDialog();
+                if (Directory.Exists($"{path}\\{dialog.name}")) {
+                    throw new Exception("This folder already exists");
+                }
+                Directory.CreateDirectory($"{path}\\{dialog.name}");
+                GetDirInfo(path);
+            }catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //Create new file from list view menu strip
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                Dialog dialog = new Dialog();
+                DialogResult result = dialog.ShowDialog();
+                if (File.Exists($"{path}\\{dialog.name}")) {
+                    throw new Exception("This file already exists");
+                }
+                File.Create($"{path}\\{dialog.name}");
+                GetDirInfo(path);
+            }
+            catch(System.Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
