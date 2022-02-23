@@ -23,6 +23,8 @@
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
             this.drivesTree = new System.Windows.Forms.TreeView();
             this.DirName = new System.Windows.Forms.Label();
             this.browserString = new System.Windows.Forms.TextBox();
@@ -41,9 +43,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dirInfoPanel = new System.Windows.Forms.TabPage();
             this.dirList = new System.Windows.Forms.ListView();
+            this.listViewItemContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.listItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listItem2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listItem3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dirListMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.createNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.driveInfoPanel.SuspendLayout();
             this.dirInfoPanel.SuspendLayout();
+            this.listViewItemContextMenu.SuspendLayout();
+            this.dirListMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // drivesTree
@@ -58,10 +70,10 @@
             // DirName
             // 
             this.DirName.AutoSize = true;
-            this.DirName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DirName.Location = new System.Drawing.Point(192, 51);
+            this.DirName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DirName.Location = new System.Drawing.Point(197, 35);
             this.DirName.Name = "DirName";
-            this.DirName.Size = new System.Drawing.Size(157, 25);
+            this.DirName.Size = new System.Drawing.Size(116, 20);
             this.DirName.TabIndex = 1;
             this.DirName.Text = "Directory name";
             // 
@@ -69,9 +81,9 @@
             // 
             this.browserString.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.browserString.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.browserString.Location = new System.Drawing.Point(197, 12);
+            this.browserString.Location = new System.Drawing.Point(201, 12);
             this.browserString.Name = "browserString";
-            this.browserString.Size = new System.Drawing.Size(382, 20);
+            this.browserString.Size = new System.Drawing.Size(378, 20);
             this.browserString.TabIndex = 2;
             this.browserString.KeyDown += new System.Windows.Forms.KeyEventHandler(this.browserString_KeyUp);
             // 
@@ -92,11 +104,11 @@
             this.tabControl1.Controls.Add(this.dirInfoPanel);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(197, 79);
+            this.tabControl1.Location = new System.Drawing.Point(197, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(444, 275);
+            this.tabControl1.Size = new System.Drawing.Size(444, 296);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 5;
             this.tabControl1.TabStop = false;
@@ -218,25 +230,92 @@
             // 
             // dirInfoPanel
             // 
-            this.dirInfoPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.dirInfoPanel.BackColor = System.Drawing.SystemColors.Menu;
+            this.dirInfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dirInfoPanel.Controls.Add(this.dirList);
+            this.dirInfoPanel.Controls.Add(this.dirListMenuStrip);
             this.dirInfoPanel.Location = new System.Drawing.Point(4, 5);
             this.dirInfoPanel.Name = "dirInfoPanel";
             this.dirInfoPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.dirInfoPanel.Size = new System.Drawing.Size(436, 266);
+            this.dirInfoPanel.Size = new System.Drawing.Size(436, 287);
             this.dirInfoPanel.TabIndex = 1;
             this.dirInfoPanel.Text = "tabPage2";
             // 
             // dirList
             // 
+            this.dirList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dirList.HideSelection = false;
-            this.dirList.Location = new System.Drawing.Point(2, 2);
+            this.dirList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.dirList.Location = new System.Drawing.Point(-1, 30);
             this.dirList.Name = "dirList";
-            this.dirList.Size = new System.Drawing.Size(431, 263);
+            this.dirList.Size = new System.Drawing.Size(437, 256);
             this.dirList.TabIndex = 0;
             this.dirList.UseCompatibleStateImageBehavior = false;
             this.dirList.View = System.Windows.Forms.View.Tile;
             this.dirList.ItemActivate += new System.EventHandler(this.viewListItemActive);
+            this.dirList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dirList_MouseClick);
+            // 
+            // listViewItemContextMenu
+            // 
+            this.listViewItemContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listItemToolStripMenuItem,
+            this.listItem2ToolStripMenuItem,
+            this.listItem3ToolStripMenuItem});
+            this.listViewItemContextMenu.Name = "contextMenuStrip2";
+            this.listViewItemContextMenu.Size = new System.Drawing.Size(123, 70);
+            // 
+            // listItemToolStripMenuItem
+            // 
+            this.listItemToolStripMenuItem.Name = "listItemToolStripMenuItem";
+            this.listItemToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.listItemToolStripMenuItem.Text = "ListItem";
+            // 
+            // listItem2ToolStripMenuItem
+            // 
+            this.listItem2ToolStripMenuItem.Name = "listItem2ToolStripMenuItem";
+            this.listItem2ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.listItem2ToolStripMenuItem.Text = "ListItem2";
+            // 
+            // listItem3ToolStripMenuItem
+            // 
+            this.listItem3ToolStripMenuItem.Name = "listItem3ToolStripMenuItem";
+            this.listItem3ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.listItem3ToolStripMenuItem.Text = "ListItem3";
+            // 
+            // dirListMenuStrip
+            // 
+            this.dirListMenuStrip.BackColor = System.Drawing.SystemColors.Menu;
+            this.dirListMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewToolStripMenuItem});
+            this.dirListMenuStrip.Location = new System.Drawing.Point(3, 3);
+            this.dirListMenuStrip.Name = "dirListMenuStrip";
+            this.dirListMenuStrip.Size = new System.Drawing.Size(428, 24);
+            this.dirListMenuStrip.TabIndex = 1;
+            this.dirListMenuStrip.Text = "menuStrip1";
+            // 
+            // createNewToolStripMenuItem
+            // 
+            this.createNewToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.createNewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.folderToolStripMenuItem,
+            this.fileToolStripMenuItem});
+            this.createNewToolStripMenuItem.Name = "createNewToolStripMenuItem";
+            this.createNewToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.createNewToolStripMenuItem.Text = "Create new";
+            // 
+            // folderToolStripMenuItem
+            // 
+            this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
+            this.folderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.folderToolStripMenuItem.Text = "Folder";
+            this.folderToolStripMenuItem.Click += new System.EventHandler(this.folderToolStripMenuItem_Click);
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fileToolStripMenuItem.Text = "File";
             // 
             // Form1
             // 
@@ -249,12 +328,17 @@
             this.Controls.Add(this.browserString);
             this.Controls.Add(this.DirName);
             this.Controls.Add(this.drivesTree);
+            this.MainMenuStrip = this.dirListMenuStrip;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Яковенко Артем";
             this.tabControl1.ResumeLayout(false);
             this.driveInfoPanel.ResumeLayout(false);
             this.driveInfoPanel.PerformLayout();
             this.dirInfoPanel.ResumeLayout(false);
+            this.dirInfoPanel.PerformLayout();
+            this.listViewItemContextMenu.ResumeLayout(false);
+            this.dirListMenuStrip.ResumeLayout(false);
+            this.dirListMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,6 +364,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView dirList;
+        private System.Windows.Forms.ContextMenuStrip listViewItemContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem listItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listItem2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listItem3ToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip dirListMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem createNewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem folderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     }
 }
 

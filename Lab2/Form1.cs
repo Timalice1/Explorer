@@ -101,6 +101,8 @@ namespace Lab2 {
         private void GetDirInfo(String _path) {
             tabControl1.Visible = true;
             tabControl1.SelectTab(dirInfoPanel);
+            DirName.Text = _path.Remove(0, _path.LastIndexOf("\\") + 1);
+
 
             prevPath = path;
             path = _path;
@@ -165,6 +167,7 @@ namespace Lab2 {
             var item = list.FocusedItem;
 
             prevPath = path;
+            
 
             DirectoryInfo directoryInfo = new DirectoryInfo(path + "\\" + item.Text);
             if (directoryInfo.Attributes.HasFlag(FileAttributes.Directory)){
@@ -174,13 +177,27 @@ namespace Lab2 {
             else {
                 try {
                     Process process = Process.Start(path + "\\" + item.Text);
-                    process.WaitForExit();
-                    process.Close();
                 }
                 catch (Exception ex) { }
             }
-
         }
 
+        //Add context menu for list view items
+        void dirList_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                var focusedItem = dirList.FocusedItem;
+                bool contains = focusedItem.Bounds.Contains(e.Location);
+                if (focusedItem != null && contains) {
+                    listViewItemContextMenu.Show(Cursor.Position);
+                }
+            }
+        }
+
+        private void folderToolStripMenuItem_Click(object sender, EventArgs e) {
+            Dialog dialog = new Dialog();
+            DialogResult result = dialog.ShowDialog();
+            Directory.CreateDirectory($"{path}\\{dialog.name}");
+            GetDirInfo(path);
+        }
     }
 }
