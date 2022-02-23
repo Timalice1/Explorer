@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item1");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
             this.drivesTree = new System.Windows.Forms.TreeView();
             this.DirName = new System.Windows.Forms.Label();
             this.browserString = new System.Windows.Forms.TextBox();
@@ -43,19 +43,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dirInfoPanel = new System.Windows.Forms.TabPage();
             this.dirList = new System.Windows.Forms.ListView();
-            this.listViewItemContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.listItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listItem2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listItem3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dirListMenuStrip = new System.Windows.Forms.MenuStrip();
             this.createNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listViewItemContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.listItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listItem2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listItem3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.driveInfoPanel.SuspendLayout();
             this.dirInfoPanel.SuspendLayout();
-            this.listViewItemContextMenu.SuspendLayout();
             this.dirListMenuStrip.SuspendLayout();
+            this.listViewItemContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // drivesTree
@@ -129,7 +130,7 @@
             this.driveInfoPanel.Location = new System.Drawing.Point(4, 5);
             this.driveInfoPanel.Name = "driveInfoPanel";
             this.driveInfoPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.driveInfoPanel.Size = new System.Drawing.Size(436, 266);
+            this.driveInfoPanel.Size = new System.Drawing.Size(436, 287);
             this.driveInfoPanel.TabIndex = 0;
             this.driveInfoPanel.Text = "tabPage1";
             // 
@@ -246,7 +247,7 @@
             this.dirList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dirList.HideSelection = false;
             this.dirList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.dirList.Location = new System.Drawing.Point(-1, 30);
             this.dirList.Name = "dirList";
             this.dirList.Size = new System.Drawing.Size(437, 256);
@@ -255,33 +256,6 @@
             this.dirList.View = System.Windows.Forms.View.Tile;
             this.dirList.ItemActivate += new System.EventHandler(this.viewListItemActive);
             this.dirList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dirList_MouseClick);
-            // 
-            // listViewItemContextMenu
-            // 
-            this.listViewItemContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listItemToolStripMenuItem,
-            this.listItem2ToolStripMenuItem,
-            this.listItem3ToolStripMenuItem});
-            this.listViewItemContextMenu.Name = "contextMenuStrip2";
-            this.listViewItemContextMenu.Size = new System.Drawing.Size(123, 70);
-            // 
-            // listItemToolStripMenuItem
-            // 
-            this.listItemToolStripMenuItem.Name = "listItemToolStripMenuItem";
-            this.listItemToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.listItemToolStripMenuItem.Text = "ListItem";
-            // 
-            // listItem2ToolStripMenuItem
-            // 
-            this.listItem2ToolStripMenuItem.Name = "listItem2ToolStripMenuItem";
-            this.listItem2ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.listItem2ToolStripMenuItem.Text = "ListItem2";
-            // 
-            // listItem3ToolStripMenuItem
-            // 
-            this.listItem3ToolStripMenuItem.Name = "listItem3ToolStripMenuItem";
-            this.listItem3ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.listItem3ToolStripMenuItem.Text = "ListItem3";
             // 
             // dirListMenuStrip
             // 
@@ -307,16 +281,50 @@
             // folderToolStripMenuItem
             // 
             this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
-            this.folderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.folderToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.folderToolStripMenuItem.Text = "Folder";
             this.folderToolStripMenuItem.Click += new System.EventHandler(this.folderToolStripMenuItem_Click);
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.fileToolStripMenuItem.Text = "File";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
+            // 
+            // listViewItemContextMenu
+            // 
+            this.listViewItemContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listItemToolStripMenuItem,
+            this.listItem2ToolStripMenuItem,
+            this.listItem3ToolStripMenuItem,
+            this.copyToolStripMenuItem});
+            this.listViewItemContextMenu.Name = "contextMenuStrip2";
+            this.listViewItemContextMenu.Size = new System.Drawing.Size(181, 114);
+            // 
+            // listItemToolStripMenuItem
+            // 
+            this.listItemToolStripMenuItem.Name = "listItemToolStripMenuItem";
+            this.listItemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listItemToolStripMenuItem.Text = "Move";
+            // 
+            // listItem2ToolStripMenuItem
+            // 
+            this.listItem2ToolStripMenuItem.Name = "listItem2ToolStripMenuItem";
+            this.listItem2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listItem2ToolStripMenuItem.Text = "Rename";
+            // 
+            // listItem3ToolStripMenuItem
+            // 
+            this.listItem3ToolStripMenuItem.Name = "listItem3ToolStripMenuItem";
+            this.listItem3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listItem3ToolStripMenuItem.Text = "Delete";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
             // 
             // Form1
             // 
@@ -337,9 +345,9 @@
             this.driveInfoPanel.PerformLayout();
             this.dirInfoPanel.ResumeLayout(false);
             this.dirInfoPanel.PerformLayout();
-            this.listViewItemContextMenu.ResumeLayout(false);
             this.dirListMenuStrip.ResumeLayout(false);
             this.dirListMenuStrip.PerformLayout();
+            this.listViewItemContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,6 +381,7 @@
         private System.Windows.Forms.ToolStripMenuItem createNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem folderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
     }
 }
 
