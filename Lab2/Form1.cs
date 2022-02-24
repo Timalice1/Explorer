@@ -224,12 +224,13 @@ namespace Lab2 {
             }
         }
 
+        //Rename files & dirs
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e) {
             try {
                 var focusedItem = dirList.FocusedItem;
                 string name = $"{path}\\{focusedItem.Text}";
-                
-                if (File.Exists(name) || Directory.Exists(name)){
+
+                if (File.Exists(name) || Directory.Exists(name)) {
                     Dialog dialog = new Dialog();
                     DialogResult res = dialog.ShowDialog();
                     string new_name = $"{path}\\{dialog.name}";
@@ -245,7 +246,40 @@ namespace Lab2 {
                     }
                 }
                 GetDirInfo(path);
-            }catch(Exception ex) {
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void listItem3ToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                var focusedItem = dirList.FocusedItem;
+                string name = $"{path}\\{focusedItem.Text}";
+
+                if (File.Exists(name) || Directory.Exists(name)) {
+                    DirectoryInfo info = new DirectoryInfo(name);
+                    if (info.Attributes.HasFlag(FileAttributes.Directory)) {
+                        var dialog = MessageBox.Show($"You realy want to delete folder \"{focusedItem.Text}\" with all content?", "Delete", buttons:MessageBoxButtons.YesNo);
+                        if(dialog == DialogResult.Yes) {
+                            Directory.Delete(name, true);
+                            GetDirInfo(path);
+                            MessageBox.Show($"Folder \"{focusedItem.Text}\" has been delete");
+                        }
+                    }
+                    else {
+                        var dialog = MessageBox.Show($"You realy want to delete file \"{focusedItem.Text}\"?", "Delete", buttons: MessageBoxButtons.YesNo);
+                        if (dialog == DialogResult.Yes) {
+                            File.Delete(name);
+                            GetDirInfo(path);
+                            MessageBox.Show($"File \"{focusedItem.Text}\" has been delete");
+                        }
+                    }
+                    
+                }
+                GetDirInfo(path);
+            }
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }
