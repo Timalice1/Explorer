@@ -303,7 +303,11 @@ namespace Lab2 {
                 DirectoryInfo info = new DirectoryInfo(name);
                 if (info.Attributes.HasFlag(FileAttributes.Directory)) {
                     Directory.Move(name, selectDir.dirName + "\\" + focusedItem.Text);
-                    MessageBox.Show($"File \"{focusedItem.Text}\" moved to \n {selectDir.dirName}");
+                    MessageBox.Show($"Folder \"{focusedItem.Text}\" moved to \n{selectDir.dirName}");
+                }
+                else {
+                    File.Move(name, selectDir.dirName + "\\" + focusedItem.Text);
+                    MessageBox.Show($"File \"{focusedItem.Text}\" moved to \n{selectDir.dirName}");
                 }
                 GetDirInfo(path);
                 updateTree();
