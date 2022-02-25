@@ -12,13 +12,8 @@ namespace Lab2 {
 
         public Form1() {
             InitializeComponent();
-            drivesTree.Nodes.Clear();
-
-            drivesTree.BeforeExpand += drivesTree_BeforeExpand;
-
-            //Fill tree with drives
-            FillDriveNodes();
-
+            
+            updateTree();
 
             //Convert Drive info array to list
             foreach (var drive in DriveInfo.GetDrives()) {
@@ -30,6 +25,14 @@ namespace Lab2 {
 
         }
 
+        private void updateTree() {
+            drivesTree.Nodes.Clear();
+
+            drivesTree.BeforeExpand += drivesTree_BeforeExpand;
+
+            //Fill tree with drives
+            FillDriveNodes();
+        }
 
         void drivesTree_BeforeExpand(object sender, TreeViewCancelEventArgs e) {
             e.Node.Nodes.Clear();
@@ -119,6 +122,7 @@ namespace Lab2 {
                 }
                 dirList.Items.Add(directoryInfo.Name);
             }
+
         }
 
         private void GetDriveInfo(String name) {
@@ -203,6 +207,7 @@ namespace Lab2 {
                 }
                 Directory.CreateDirectory($"{path}\\{dialog.name}");
                 GetDirInfo(path);
+                updateTree();
             }catch(Exception ex) {
                 MessageBox.Show(ex.Message);
             }
@@ -218,6 +223,7 @@ namespace Lab2 {
                 }
                 File.Create($"{path}\\{dialog.name}");
                 GetDirInfo(path);
+                updateTree();
             }
             catch(System.Exception ex) {
                 MessageBox.Show(ex.Message);
@@ -246,13 +252,14 @@ namespace Lab2 {
                     }
                 }
                 GetDirInfo(path);
+                updateTree();
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void listItem3ToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
             try {
                 var focusedItem = dirList.FocusedItem;
                 string name = $"{path}\\{focusedItem.Text}";
@@ -278,10 +285,33 @@ namespace Lab2 {
                     
                 }
                 GetDirInfo(path);
+                updateTree();
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void moveToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                SelectDirectory selectDir = new SelectDirectory();
+                DialogResult res = selectDir.ShowDialog();
+
+                var focusedItem = dirList.FocusedItem;
+                string name = $"{path}\\{focusedItem.Text}";
+
+                DirectoryInfo info = new DirectoryInfo(name);
+                if (info.Attributes.HasFlag(FileAttributes.Directory)) {
+                    Directory.Move(name, selectDir.dirName + "\\" + focusedItem.Text);
+                    MessageBox.Show($"File \"{focusedItem.Text}\" moved to \n {selectDir.dirName}");
+                }
+                GetDirInfo(path);
+                updateTree();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 
